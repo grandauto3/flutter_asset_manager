@@ -1,23 +1,21 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod ui;
-mod yaml;
+use anyhow::Result;
+use iced::{Sandbox, Settings};
 
-use anyhow::{anyhow, Result};
 use crate::{
-    ui::window,
-    yaml::parser::{YamlParser},
+    core::app::App,
+    yaml::parser::YamlParser
 };
 
+mod ui;
+mod yaml;
+mod core;
 
 fn main() -> Result<()> {
     let asset_list = YamlParser::read_file()?;
 
-    let native_options = eframe::NativeOptions::default();
-    eframe::run_native("Window title",
-                       native_options,
-                       Box::new(|cc| Box::new(window::Ui::new(cc, asset_list))),
-    ).map_err(|error: eframe::Error| anyhow!(error.to_string()))?;
+    App::run(Settings::default())?;
 
     Ok(())
 }
