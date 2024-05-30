@@ -11,12 +11,12 @@ use crate::{
 
 
 fn main() -> Result<()> {
-    YamlParser::read_file()?;
+    let asset_list = YamlParser::read_file()?;
 
     let native_options = eframe::NativeOptions::default();
     eframe::run_native("Window title",
                        native_options,
-                       Box::new(|cc| Box::new(window::Ui::new(cc))),
+                       Box::new(|cc| Box::new(window::Ui::new(cc, asset_list))),
     ).map_err(|error: eframe::Error| anyhow!(error.to_string()))?;
 
     Ok(())

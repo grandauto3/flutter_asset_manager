@@ -1,10 +1,10 @@
 use std::{fs, io};
-use yaml_rust::YamlLoader;
+use yaml_rust::{Yaml, YamlLoader};
 
 pub struct YamlParser;
 
 impl YamlParser {
-    pub fn read_file() -> io::Result<()>{
+    pub fn read_file() -> io::Result<Yaml>{
         let content = fs::read_to_string("pubspec.yaml")?;
         println!("{content}");
 
@@ -15,6 +15,6 @@ impl YamlParser {
         println!("{:?}", doc);
         println!("Assets: {:?}", assets);
 
-        Ok(())
+        Ok(assets.to_owned())
     }
 }
