@@ -1,4 +1,10 @@
 #[derive(Debug, Clone)]
 pub enum UiIcedMessage {
-    ButtonPressed,
+    ButtonPressed(Option<ButtonPressedMessage>),
+}
+
+#[derive(Debug, Clone)]
+pub enum ButtonPressedMessage{
+    FilePath,
+    DirPath
 }

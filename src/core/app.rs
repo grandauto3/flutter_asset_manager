@@ -43,7 +43,7 @@ impl Sandbox for App {
 
     fn update(&mut self, message: Self::Message) {
         match message {
-            UiIcedMessage::ButtonPressed => self.get_state_mut().counter += 1,
+            UiIcedMessage::ButtonPressed(_) => self.get_state_mut().counter += 1,
         }
     }
 
