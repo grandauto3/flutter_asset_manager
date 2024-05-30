@@ -1,11 +1,22 @@
 use iced::{
     Element,
+    Length,
     Sandbox,
     Theme,
+    widget::{
+        Container
+    },
 };
 
-use crate::core::messages::UiIcedMessage;
-use crate::ui::iced_ui::IcedUi;
+use crate::{
+    core::messages::UiIcedMessage,
+    ui::iced_ui::IcedUi,
+};
+
+#[derive(Default)]
+pub struct AppState {
+    pub counter: u32,
+}
 
 #[derive(Default)]
 pub struct App(AppState);
@@ -19,13 +30,6 @@ impl App {
         &mut self.0
     }
 }
-
-
-#[derive(Default)]
-pub struct AppState {
-    pub counter: u32,
-}
-
 
 impl Sandbox for App {
     type Message = UiIcedMessage;
@@ -45,7 +49,13 @@ impl Sandbox for App {
 
 
     fn view(&self) -> Element<'_, Self::Message> {
-        IcedUi::view(self.get_state())
+        Container::new(
+            IcedUi::view(self.get_state()))
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .center_x()
+            .center_y()
+            .into()
     }
 
     fn theme(&self) -> Theme {
