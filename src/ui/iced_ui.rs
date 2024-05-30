@@ -1,3 +1,4 @@
+#[allow(unused_imports)]
 use iced::{
     Element,
     widget::{
@@ -12,6 +13,7 @@ use crate::core::messages::UiIcedMessage;
 pub struct IcedUi;
 
 impl IcedUi {
+    #[allow(unused)]
     pub fn view(state: &AppState) -> Element<UiIcedMessage> {
         column![
             text(state.counter),
