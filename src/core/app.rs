@@ -1,12 +1,14 @@
-use iced::{Application, Command, Element, Length, Sandbox, Theme, widget::{
+use iced::{Application, Command, Element, font, Length, Theme, widget::{
     Container
 }};
 
 use crate::{
-    core::messages::UiIcedMessage,
+    core::{
+        messages::UiIcedMessage,
+        messages::AppMessages,
+    },
     ui::iced_ui::IcedUi,
 };
-use crate::core::messages::AppMessages;
 
 #[derive(Default)]
 pub struct AppState {
@@ -32,8 +34,10 @@ impl Application for App {
     type Theme = Theme;
     type Flags = ();
 
-    fn new(_flags: ()) -> (App, iced::Command<Self::Message>) {
-        (Self::default(), Command::none())
+    fn new(_flags: ()) -> (App, Command<Self::Message>) {
+        (Self::default(), Command::batch(vec![
+            font::load(iced_aw::BOOTSTRAP_FONT_BYTES).map(AppMessages::FontLoaded)
+        ]))
     }
 
     fn title(&self) -> String {
@@ -51,7 +55,7 @@ impl Application for App {
     }
 
 
-    fn view(&self) -> Element<'_, Self::Message, (), iced::Renderer> {
+    fn view(&self) -> Element<Self::Message> {
         Container::new(
             IcedUi::view(self.get_state()))
             .width(Length::Fill)
