@@ -1,17 +1,12 @@
-use iced::{
-    Element,
-    Length,
-    Sandbox,
-    Theme,
-    widget::{
-        Container
-    },
-};
+use iced::{Application, Command, Element, Length, Sandbox, Theme, widget::{
+    Container
+}};
 
 use crate::{
     core::messages::UiIcedMessage,
     ui::iced_ui::IcedUi,
 };
+use crate::core::messages::AppMessages;
 
 #[derive(Default)]
 pub struct AppState {
@@ -31,24 +26,32 @@ impl App {
     }
 }
 
-impl Sandbox for App {
-    type Message = UiIcedMessage;
-    fn new() -> Self {
-        Self::default()
+impl Application for App {
+    type Executor = iced::executor::Default;
+    type Message = AppMessages;
+    type Theme = Theme;
+    type Flags = ();
+
+    fn new(_flags: ()) -> (App, iced::Command<Self::Message>) {
+        (Self::default(), Command::none())
     }
 
     fn title(&self) -> String {
         "Window title".to_owned()
     }
 
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Self::Message) -> Command<Self::Message> {
         match message {
-            UiIcedMessage::ButtonPressed(_) => self.get_state_mut().counter += 1,
+            Self::Message::UiMessages(UiIcedMessage::ButtonPressed(_)) => {
+                self.get_state_mut().counter += 1;
+                Command::none()
+            }
+            _ => { Command::none() }
         }
     }
 
 
-    fn view(&self) -> Element<'_, Self::Message> {
+    fn view(&self) -> Element<'_, Self::Message, (), iced::Renderer> {
         Container::new(
             IcedUi::view(self.get_state()))
             .width(Length::Fill)
