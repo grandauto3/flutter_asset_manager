@@ -2,6 +2,7 @@ use iced::font;
 
 pub const FILE_PATH_MESSAGE: AppMessages = AppMessages::UiMessages(UiIcedMessage::ButtonPressed(Some(ButtonPressedMessage::FilePath)));
 pub const DIR_PATH_MESSAGE: AppMessages = AppMessages::UiMessages(UiIcedMessage::ButtonPressed(Some(ButtonPressedMessage::DirPath)));
+pub const ADD_ASSETS_MESSAGE: AppMessages = AppMessages::UiMessages(UiIcedMessage::ButtonPressed(Some(ButtonPressedMessage::AddAssets)));
 
 #[derive(Debug, Clone)]
 pub enum AppMessages {
@@ -18,4 +19,5 @@ pub enum UiIcedMessage {
 pub enum ButtonPressedMessage {
     FilePath,
     DirPath,
+    AddAssets,
 }
