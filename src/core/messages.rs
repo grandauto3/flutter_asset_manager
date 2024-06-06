@@ -6,7 +6,7 @@ pub const DIR_PATH_MESSAGE: AppMessages = AppMessages::UiMessages(UiIcedMessage:
 #[derive(Debug, Clone)]
 pub enum AppMessages {
     FontLoaded(Result<(), font::Error>),
-    UiMessages(UiIcedMessage)
+    UiMessages(UiIcedMessage),
 }
 
 #[derive(Debug, Clone)]
