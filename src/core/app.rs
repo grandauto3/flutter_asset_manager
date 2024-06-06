@@ -1,6 +1,14 @@
-use iced::{Application, Command, Element, font, Length, Theme, widget::{
-    Container
-}};
+use iced::{
+    Application,
+    Command,
+    Element,
+    font,
+    Length,
+    Theme,
+    widget::{
+        Container
+    },
+};
 
 use crate::{
     core::{
