@@ -16,7 +16,7 @@ mod yaml;
 mod core;
 
 fn main() -> Result<()> {
-    let asset_list = YamlParser::read_file()?;
+    let asset_list = YamlParser::read_file("./pubspec.yaml".as_ref())?;
 
     App::run(Settings::default())?;
 
