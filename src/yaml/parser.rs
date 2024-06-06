@@ -1,11 +1,18 @@
-use std::{fs, io};
-use yaml_rust::{Yaml, YamlLoader};
+use std::{
+    fs,
+    io,
+    path::Path,
+};
+use yaml_rust::{
+    Yaml,
+    YamlLoader,
+};
 
 pub struct YamlParser;
 
 impl YamlParser {
-    pub fn read_file() -> io::Result<Yaml>{
-        let content = fs::read_to_string("pubspec.yaml")?;
+    pub fn read_file(yaml_path: &Path) -> io::Result<Yaml> {
+        let content = fs::read_to_string(yaml_path)?;
         println!("{content}");
 
         let docs = YamlLoader::load_from_str(content.as_str()).unwrap();

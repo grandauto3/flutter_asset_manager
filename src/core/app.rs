@@ -1,6 +1,14 @@
-use iced::{Application, Command, Element, font, Length, Theme, widget::{
-    Container
-}};
+use iced::{
+    Application,
+    Command,
+    Element,
+    font,
+    Length,
+    Theme,
+    widget::{
+        Container
+    },
+};
 
 use crate::{
     core::{
@@ -11,9 +19,7 @@ use crate::{
 };
 
 #[derive(Default)]
-pub struct AppState {
-    pub counter: u32,
-}
+pub struct AppState {}
 
 #[derive(Default)]
 pub struct App(AppState);
@@ -46,18 +52,13 @@ impl Application for App {
 
     fn update(&mut self, message: Self::Message) -> Command<Self::Message> {
         match message {
-            Self::Message::UiMessages(UiIcedMessage::ButtonPressed(_)) => {
-                self.get_state_mut().counter += 1;
-                Command::none()
-            }
             _ => { Command::none() }
         }
     }
 
 
     fn view(&self) -> Element<Self::Message> {
-        Container::new(
-            IcedUi::view(self.get_state()))
+        Container::new(IcedUi::view(self.get_state()))
             .width(Length::Fill)
             .height(Length::Fill)
             .center_x()
